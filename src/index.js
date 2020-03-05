@@ -4,13 +4,20 @@ const api = apiFactory('http://api.vagalume.com.br', {
   headers: {
     accept: 'application/json',
   },
+  body: {
+    apikey: '660a4395f992ff67786584e238f501aa',
+  },
 });
 
-const search = api.ref('search.art');
+const search = api.ref('search.art', {
+  body: {
+    apikey: '660a4395f992ff67786584e238f501aa',
+  },
+});
 
-search.send('apikey=660a4395f992ff67786584e238f501aa&q=Skank&limit=5')
+search.send('q=Skank&limit=5')
   .then(console.log);
 
-api.ref('hotspots.php', { body: { apikey: '660a4395f992ff67786584e238f501aa' } })
+api.ref('hotspots.php')
   .send()
   .then(console.log);

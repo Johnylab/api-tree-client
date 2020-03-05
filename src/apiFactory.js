@@ -35,7 +35,9 @@ const parsePayload = (data, method = 'get') => {
 
 const apiFactorySend = async (path, data, { body, ...options }) => {
   try {
-    const payload = parsePayload({ ...body, ...data }, options.method);
+    const defaultPayload = parsePayload(body, options.method);
+    const currentPayload = parsePayload(data, options.method);
+    const payload = [defaultPayload, currentPayload].filter(e => e).join('&');
     const url = (
       options.method === 'post'
         ? path
