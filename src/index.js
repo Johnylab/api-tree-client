@@ -1,23 +1,13 @@
 import apiFactory from "./apiFactory.js";
 
-const api = apiFactory('http://api.vagalume.com.br', {
+const api = apiFactory('https://pokeapi.co/api/v2/', {
   headers: {
     accept: 'application/json',
   },
-  body: {
-    apikey: '660a4395f992ff67786584e238f501aa',
-  },
 });
 
-const search = api.ref('search.art', {
-  body: {
-    apikey: '660a4395f992ff67786584e238f501aa',
-  },
-});
+const pokemon = api.ref('pokemon');
 
-search.send('q=Skank&limit=5')
-  .then(console.log);
+pokemon.ref('pikachu').send().then(console.log);
 
-api.ref('hotspots.php')
-  .send()
-  .then(console.log);
+api.ref('pokemon').ref('10').send().then(console.log);
